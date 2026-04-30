@@ -5,7 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import { useAccount, useChainId, usePublicClient } from "wagmi";
 import { getWalletClient } from "@wagmi/core";
 import { parseUnits, type Address } from "viem";
-import { ArrowLeft, Lock, Copy, Check, Loader2, Users, Target, TrendingUp } from "lucide-react";
+import { ArrowLeft, Lock, Copy, Loader2, Users, Target, TrendingUp } from "lucide-react";
 import { toast } from "sonner";
 import Link from "next/link";
 import { wagmiConfig } from "@/lib/wagmi-config";
