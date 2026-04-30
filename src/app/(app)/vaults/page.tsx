@@ -4,8 +4,9 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { useAccount, useChainId, usePublicClient } from "wagmi";
 import { getWalletClient } from "@wagmi/core";
 import { parseUnits, type Address } from "viem";
-import { Lock, Plus } from "lucide-react";
+import { Lock, Plus, ExternalLink } from "lucide-react";
 import { toast } from "sonner";
+import Link from "next/link";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { wagmiConfig } from "@/lib/wagmi-config";
 import { useTutorial } from "@/components/TutorialProvider";
@@ -209,8 +210,14 @@ export default function Vaults() {
                 >
                   Deposit (Confidential)
                 </button>
+                <Link
+                  href={`/vaults/${v.id}`}
+                  className="px-3 py-2 border border-border rounded-sm text-xs hover:border-primary hover:text-primary transition flex items-center gap-1"
+                >
+                  <ExternalLink className="w-3 h-3" /> View
+                </Link>
                 <button
-                  onClick={() => { navigator.clipboard.writeText(`${window.location.origin}/vaults?room=${v.id}`); toast("Deep link copied"); }}
+                  onClick={() => { navigator.clipboard.writeText(`${window.location.origin}/vaults/${v.id}`); toast("Deep link copied"); }}
                   className="px-3 py-2 border border-border rounded-sm text-xs hover:border-primary hover:text-primary transition"
                 >
                   Share

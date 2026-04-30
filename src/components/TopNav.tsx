@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAccount, useConnect, useDisconnect, useChainId } from "wagmi";
 import { Wallet, Power, Activity, Menu, RotateCcw } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BrotherhoodSigil } from "@/components/AssassinIcon";
 import { useTutorial } from "@/components/TutorialProvider";
 import { KEYS } from "@/lib/storage-keys";
@@ -33,9 +33,14 @@ export default function TopNav() {
   const chainId = useChainId();
   const pathname = usePathname();
   const [mobileNav, setMobileNav] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
 
   const { exitTutorial } = useTutorial();
   const onNetwork = chainId === TARGET_CHAIN_ID;
+  // Use mounted guard to prevent hydration mismatch: server always renders
+  // the disconnected state; client switches after first paint.
+  const connected = mounted && isConnected;
 
   const handleReset = () => {
     // Full reset: wipe all browser state for this origin.
@@ -72,7 +77,7 @@ export default function TopNav() {
         </Link>
 
         {/* Desktop tabs */}
-        {isConnected && (
+        {connected && (
           <nav className="hidden md:flex items-center gap-1 ml-2">
             {tabs.map(t => {
               const active = pathname === t.href || (t.href === "/" && pathname === "");
@@ -93,7 +98,7 @@ export default function TopNav() {
         <div className="flex-1" />
 
         {/* Network indicator */}
-        {isConnected && (
+        {connected && (
           <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 border border-border rounded-sm bg-surface">
             <Activity className="w-3 h-3 text-success" />
             <span className="text-[11px] font-mono uppercase tracking-wider">
@@ -104,7 +109,7 @@ export default function TopNav() {
         )}
 
         {/* Reset button — shown when connected */}
-        {isConnected && (
+        {connected && (
           <AlertDialog>
             <AlertDialogTrigger asChild>
               <button
@@ -134,7 +139,7 @@ export default function TopNav() {
         )}
 
         {/* Wallet area */}
-        {!isConnected ? (
+        {!connected ? (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <button className="flex items-center gap-2 px-3 md:px-4 py-2 text-[11px] md:text-[12px] uppercase tracking-[0.14em] font-semibold bg-primary text-primary-foreground hover:bg-primary-glow transition-colors rounded-sm">
@@ -185,7 +190,7 @@ export default function TopNav() {
         )}
 
         {/* Mobile nav */}
-        {isConnected && (
+        {connected && (
           <DropdownMenu open={mobileNav} onOpenChange={setMobileNav}>
             <DropdownMenuTrigger asChild>
               <button className="md:hidden flex items-center justify-center w-9 h-9 border border-border rounded-sm bg-surface">
