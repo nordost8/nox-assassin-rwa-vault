@@ -1,0 +1,12 @@
+node_modules
+.next
+.git
+.env*.local
+.env.local
+*.pem
+npm-debug.log*
+/out
+/coverage
+/build
+/cache
+/ignore_directory
