@@ -4,6 +4,24 @@ End-to-end confidential portfolio shielding dashboard for ERC-20 assets using iE
 
 **Primary network**: Arbitrum Sepolia (chainId `421614`).
 
+## Deployed contracts (Arbitrum Sepolia)
+
+These are the **live addresses used in the demo video**.
+
+- **Vault contract**: `0x2794a3335c63FCB6eD2B8A9975fDe2aa95eb0DeA`
+- **Demo ERC-20 asset** (`dASSET`): `0x464bbFeaB3e286096196380fadd87346cC50061c`
+- **Demo Confidential wrapper** (ERC-7984): `0x93D0738D209eD1353dF624cb4B024b38a198DF32`
+- **Demo Faucet**: `0x54Da3FF77e45E034F3eE4050cc0dD2F088715490`
+
+### RWA demo tokens (asset → confidential wrapper)
+
+- **Gold**: `0x828a6D3E4D28E0670E6DAa673464678dF45CF675` → `0x1e72d243fc5aa66B80183fc68540564D64be4995`
+- **Platinum**: `0x537f6252e0c654EA672832a66625b5C236B32DFC` → `0xa5c8E10cf426077E0E1fF3bc2b80E43218FAac6e`
+- **Oil**: `0xFCc67C73F20dBA53270363e7022f3fD8267A8FbF` → `0xA5e77753fd9d2A960817FcF73070c588049BBCc4`
+- **Diamond**: `0x415eA68539aA1162d6a2729bdd188358f54395C9` → `0x07D1505bDBDF1b65cF6ea5ce76ee471cA05f3C60`
+- **Silver**: `0x0776B63C6D3ED084937F37ce051982Ba7ea1196f` → `0x2c4D441f8616073dfE111e56313016aB5A74d91D`
+- **Rare Earth**: `0x1e8f9C07bE22CE9C0723ba2f7bFa1aBe0DbB923E` → `0x589D860F91F65D6Ac6504253b5d128C9cAf94d60`
+
 ## 🚀 LIVE DEMO
 
 Try it here: **https://noxassassin.web3islands.com/**
