@@ -35,7 +35,7 @@ Try it here: **https://noxassassin.web3islands.com/**
 - **Reveal**: decrypt your own confidential balance via Nox handle (TEE-verified — no one else can read it).
 - **Transfer confidential**: encrypt amount → call confidential transfer on the wrapper (amount stays private on-chain).
 - **Shadow Vaults** (`/vaults`): create named institutional pool rooms with a funding goal and RWA token. Contributors deposit confidentially — the pool's running total is public, but each member's contribution amount is encrypted. No member can see another's stake. Built on the same Nox ERC-7984 stack with a custom vault contract.
-- **AI Advisor & News** (`/advisor`): two tabs — a ChainGPT-powered chat for RWA/DeFi questions and a curated AI News feed with live RWA market headlines. A news ticker also runs on the portfolio page. API key stays server-side.
+- **AI Advisor & News** (`/advisor`): two tabs — a ChainGPT-powered chat for RWA/DeFi questions and a curated RWA/DeFi news feed. A news ticker also runs on the portfolio page. API key stays server-side.
 - **AI audit**: server-side ChainGPT audit of bundled demo contracts (API key never exposed to client).
 
 This project is **not** an RWA issuance protocol and **does not** claim legal RWA backing.
