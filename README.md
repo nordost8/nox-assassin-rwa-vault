@@ -29,10 +29,13 @@ Try it here: **https://noxassassin.web3islands.com/**
 ## What it does
 
 - **Connect** any EVM wallet (Injected, MetaMask, Rabby, Coinbase Wallet, WalletConnect/Reown).
+- **Guided onboarding**: a step-by-step tutorial walks new users through every action — faucet claim, shield, reveal, vault — so judges and first-time visitors can experience the full flow in under 2 minutes.
 - **Scan** real public ERC-20 balances for configured tokens (on-chain reads).
-- **Shield**: `approve` underlying ERC-20 → `wrap` into confidential ERC-7984 wrapper.
-- **Reveal**: decrypt your own confidential balance via Nox handle (encrypted by default).
-- **Transfer confidential**: encrypt amount → call confidential transfer on the wrapper (amount stays private).
+- **Shield**: `approve` underlying ERC-20 → `wrap` into confidential ERC-7984 wrapper. Public balance decreases; shielded balance becomes an encrypted handle.
+- **Reveal**: decrypt your own confidential balance via Nox handle (TEE-verified — no one else can read it).
+- **Transfer confidential**: encrypt amount → call confidential transfer on the wrapper (amount stays private on-chain).
+- **Shadow Vaults** (`/vaults`): create named institutional pool rooms with a funding goal and RWA token. Contributors deposit confidentially — the pool's running total is public, but each member's contribution amount is encrypted. No member can see another's stake. Built on the same Nox ERC-7984 stack with a custom vault contract.
+- **AI Advisor & News** (`/advisor`): two tabs — a ChainGPT-powered chat for RWA/DeFi questions and a curated RWA/DeFi news feed. A news ticker also runs on the portfolio page. API key stays server-side.
 - **AI audit**: server-side ChainGPT audit of bundled demo contracts (API key never exposed to client).
 
 This project is **not** an RWA issuance protocol and **does not** claim legal RWA backing.
@@ -122,6 +125,8 @@ RPC_URL="..." \
 
 ## Manual test plan (end-to-end)
 
+### Portfolio (confidential tokens)
+
 - **Connect wallet** using WalletConnect or injected wallet.
 - **Ensure network**: switch to Arbitrum Sepolia (UI shows switch CTA if wrong network).
 - **Claim faucet** for `dASSET` (optional if faucet is deployed).
@@ -133,6 +138,16 @@ RPC_URL="..." \
 - **Reveal**: confidential balance shows **Encrypted** by default; click **Reveal** to decrypt (owner only).
 - **Transfer confidential** to another address; connect as recipient and **Reveal** received balance.
 - **AI audit**: run ChainGPT audit for `DemoAsset.sol`, `ConfidentialDemoAsset.sol`, `Faucet.sol` (server action).
+
+### Shadow Vaults (institutional pools)
+
+- Navigate to **Vaults** from the top nav.
+- Click **New Vault** and fill in a name, select an RWA token (e.g. Gold), and set a goal amount.
+- Confirm the on-chain transaction — the vault room appears in the list with a progress bar.
+- Click **View** on any room to open its dedicated detail page (`/vaults/:id`).
+- Click **Deposit (Confidential)**: approve token → contribute. The pool total updates publicly; your amount is encrypted.
+- Copy the **Share** link and open it in a new tab — it loads the specific vault room directly.
+- Verify that no room reveals individual contributor amounts — only the aggregated total is visible.
 
 ## Notes
 
